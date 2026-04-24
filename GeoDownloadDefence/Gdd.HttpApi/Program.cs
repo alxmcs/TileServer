@@ -6,6 +6,7 @@ using Gdd.Domain.Model.Requests;
 using Gdd.Domain.Services;
 using Gdd.Domain.Services.Tiles;
 using Gdd.Repository.Utils;
+using Scalar.AspNetCore;
 using Serilog;
 using Serilog.Events;
 using TileProxyServer.Services;
@@ -62,6 +63,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
