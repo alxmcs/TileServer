@@ -6,6 +6,7 @@ using Gdd.Domain.Model.Requests;
 using Gdd.Domain.Services;
 using Gdd.Domain.Services.Tiles;
 using Gdd.Repository.Utils;
+using Scalar.AspNetCore;
 using Serilog;
 using Serilog.Events;
 using TileProxyServer.Services;
@@ -25,9 +26,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddSerilog(logger);
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
 
 builder.Services.Configure<TileServerConfiguration>(builder.Configuration.GetSection("TileServer"));
 builder.Services.Configure<SqliteConfiguration>(builder.Configuration.GetSection("Sqlite"));
@@ -62,8 +62,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
