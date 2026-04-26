@@ -66,7 +66,9 @@ public class IpSecurityServiceTests
 
         Assert.NotNull(captured);
         Assert.Equal("4.4.4.4", captured!.ClientIp);
-        Assert.Same(_coords, captured.Coordinates);
+        Assert.Equal(_coords.X, captured.Coordinates.X);
+        Assert.Equal(_coords.Y, captured.Coordinates.Y);
+        Assert.Equal(_coords.Z, captured.Coordinates.Z);
         Assert.InRange(captured.RequestTime, before, after);
     }
 }
